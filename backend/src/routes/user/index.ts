@@ -9,11 +9,13 @@ import listContactController from "../../controllers/contact/listContact.control
 import listUserOwnerController from "../../controllers/User/listUserOwner.controller";
 import handleSchemaContactCreate from "../../middlewares/handleSchemaContact.middleware";
 import ContactSchema from "../../schemas/schemaContact.schema";
+import deleteContactController from "../../controllers/contact/deleteContact.controller";
 
 const ClientRoute = Router()
 
 ClientRoute.get("/contacts/",authenticationMiddleware,listContactController)
 ClientRoute.post("/contacts/",handleSchemaContactCreate(ContactSchema),authenticationMiddleware,createContactController)
+ClientRoute.delete("/contacts/:id",authenticationMiddleware,deleteContactController)
 
 ClientRoute.post("/register/",handleSchemaUserCreate(UserSchema),createUserController)
 ClientRoute.get("/",authenticationMiddleware,listUserController)
