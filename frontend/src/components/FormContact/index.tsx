@@ -60,6 +60,7 @@ const FormContact = () => {
             resetField("name");resetField("email0");resetField("telephone0")
             setListEmail([<input key="0" placeholder="Email" {...register(`email0`)}/>])
             setListTel([<input key="0" placeholder="Telephone" {...register(`telephone0`)}/>])
+            setTelEmailStyle(32)
         }).catch((err)=>{
             toast.error("Algo deu Errado, Tente Mais Tarde")
         })
