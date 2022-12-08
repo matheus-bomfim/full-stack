@@ -25,7 +25,7 @@ const FormLogin = () => {
             localStorage.setItem("token",res.data.token)
             
         }).catch((err)=>{
-            toast.error(err.response.data)
+            toast.error(err.response.data.message)
         })
     }
 

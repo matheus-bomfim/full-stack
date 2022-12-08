@@ -9,3 +9,7 @@ Rodar a Migration em outro terminal com o comando 'docker exec -i -t api yarn ty
 
 3* Finalizado os procedimentos acima, as aplicações se encontram em 
     Backend: localhost:8080
+    Frontend: localhost:3000
+
+
+ps: Diagrama Incluido

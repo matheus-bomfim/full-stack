@@ -24,6 +24,9 @@ const ListContact = () => {
               }
         }).then((res)=>{
             setListContacts([...res.data])
+        }).catch(()=>{
+            localStorage.setItem("login","false")
+            localStorage.removeItem("token")
         })
     })
 
