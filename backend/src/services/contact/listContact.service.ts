@@ -1,26 +1,25 @@
-import { AppDataSource } from "../../datasource"
-import Contact from "../../entities/contact.entity"
-import User from "../../entities/user.entity"
-import AppError from "../../errors/appError"
-import { ListContactRequest } from "../../interfaces/Contact.interface"
+import { AppDataSource } from "../../datasource";
+import User from "../../entities/user.entity";
+import AppError from "../../errors/appError";
 
-const listContactService = async ({id}:ListContactRequest) => {
-    const contactRepository = AppDataSource.getRepository(Contact)
-    const userRepository = AppDataSource.getRepository(User)
-    
-    const findUser = await userRepository.findOneBy({id:id})
-    const findContact = await contactRepository.find({
-        relations:{
-            user:true
-        }
-    })
-    
-    const filter = findContact.filter((elem)=>{return elem.user.id === findUser?.id})
-    
-    if(!filter){
-        throw new AppError(400,"Contact Não Encontrado")
-    }
-    return filter
-}
+const listContactService = async (id: string) => {
+  const userRepository = AppDataSource.getRepository(User);
 
-export default listContactService
+  const findUser = await userRepository.find({
+    where: {
+      id: id,
+    },
+    relations: {
+      UserContacts: true,
+    },
+  });
+
+
+  if (!findUser) {
+    throw new AppError(404, "User Não Encontrado");
+  }
+
+  return findUser[0].UserContacts;
+};
+
+export default listContactService;

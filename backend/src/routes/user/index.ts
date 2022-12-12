@@ -10,15 +10,21 @@ import listUserOwnerController from "../../controllers/User/listUserOwner.contro
 import handleSchemaContactCreate from "../../middlewares/handleSchemaContact.middleware";
 import ContactSchema from "../../schemas/schemaContact.schema";
 import deleteContactController from "../../controllers/contact/deleteContact.controller";
+import updateContactController from "../../controllers/contact/updateContact.controller";
+import updateUserController from "../../controllers/User/updateUser.controller";
+import deleteUserController from "../../controllers/User/deleteUser.controller";
 
 const ClientRoute = Router()
 
 ClientRoute.get("/contacts/",authenticationMiddleware,listContactController)
 ClientRoute.post("/contacts/",handleSchemaContactCreate(ContactSchema),authenticationMiddleware,createContactController)
+ClientRoute.patch("/contacts/:id",authenticationMiddleware,updateContactController)
 ClientRoute.delete("/contacts/:id",authenticationMiddleware,deleteContactController)
 
-ClientRoute.post("/register/",handleSchemaUserCreate(UserSchema),createUserController)
 ClientRoute.get("/",authenticationMiddleware,listUserController)
 ClientRoute.get("/owner",authenticationMiddleware,listUserOwnerController)
+ClientRoute.post("/register/",handleSchemaUserCreate(UserSchema),createUserController)
+ClientRoute.patch("/owner/:id",authenticationMiddleware,updateUserController)
+ClientRoute.delete("/owner/:id",authenticationMiddleware,deleteUserController)
 
 export default ClientRoute
